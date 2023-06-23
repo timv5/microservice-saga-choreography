@@ -1,0 +1,28 @@
+version: '3'
+
+networks:
+  distributed-microservice-proxy:
+    driver: bridge
+
+services:
+
+  microservice-saga-choreography-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=saga-db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_USERNAME=root
+    ports:
+      - '3306:3306'
+    networks:
+      - distributed-microservice-proxy
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - distributed-microservice-proxy
