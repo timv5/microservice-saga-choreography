@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
         LOGGER.info("Order {} completed with a status: {}", paymentDto.getOrderId(), orderStatus);
     }
 
-    private Orders createOrderEntity(OrderDto orderDto) {
+    protected Orders createOrderEntity(OrderDto orderDto) {
         return Orders.builder()
                 .userId(orderDto.getUserId())
                 .productId(orderDto.getProductId())
