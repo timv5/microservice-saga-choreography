@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserBalances {
+public class UserBalanceEntity {
 
     @Id
     @GeneratedValue

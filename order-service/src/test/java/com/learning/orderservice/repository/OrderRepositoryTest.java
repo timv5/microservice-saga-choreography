@@ -2,7 +2,7 @@ package com.learning.orderservice.repository;
 
 import com.learning.orderservice.AbstractDatabase;
 import com.learning.orderservice.DbIntegrationTest;
-import com.learning.orderservice.model.Orders;
+import com.learning.orderservice.model.OrderEntity;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class OrderRepositoryTest extends AbstractDatabase {
 
     @Test
     public void save_success() {
-        Orders orderEntity = Orders.builder()
+        OrderEntity orderEntity = OrderEntity.builder()
                 .userId(1)
                 .productId(1)
                 .price(2000.0)
@@ -30,11 +30,11 @@ public class OrderRepositoryTest extends AbstractDatabase {
 
         // save entity
         orderEntity = orderRepository.save(orderEntity);
-        Optional<Orders> savedEntityOptional = orderRepository.findById(orderEntity.getId());
+        Optional<OrderEntity> savedEntityOptional = orderRepository.findById(orderEntity.getId());
         if (savedEntityOptional.isEmpty()) {
             fail();
         }
-        Orders savedEntity = savedEntityOptional.get();
+        OrderEntity savedEntity = savedEntityOptional.get();
 
         // so that we can get DB generated fields
         entityManager.flush();

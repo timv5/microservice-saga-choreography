@@ -5,7 +5,7 @@ import com.learning.commons.dto.OrderDto;
 import com.learning.commons.dto.PaymentDto;
 import com.learning.commons.enums.OrderStatus;
 import com.learning.commons.enums.PaymentStatus;
-import com.learning.orderservice.model.Orders;
+import com.learning.orderservice.model.OrderEntity;
 import com.learning.orderservice.repository.OrderRepository;
 import com.learning.orderservice.rmq.RabbitMQProducer;
 import org.slf4j.Logger;
@@ -29,8 +29,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Orders createOrder(OrderDto orderDto) {
-        Orders order = orderRepository.save(createOrderEntity(orderDto));
+    public OrderEntity createOrder(OrderDto orderDto) {
+        OrderEntity order = orderRepository.save(createOrderEntity(orderDto));
         orderDto.setOrderId(order.getId());
         orderDto.setOrderStatus(OrderStatus.ORDER_CREATE);
         orderDto.setPaymentStatus(PaymentStatus.PAYMENT_STARTED);
@@ -61,8 +61,8 @@ public class OrderServiceImpl implements OrderService {
         LOGGER.info("Order {} completed with a status: {}", paymentDto.getOrderId(), orderStatus);
     }
 
-    protected Orders createOrderEntity(OrderDto orderDto) {
-        return Orders.builder()
+    protected OrderEntity createOrderEntity(OrderDto orderDto) {
+        return OrderEntity.builder()
                 .userId(orderDto.getUserId())
                 .productId(orderDto.getProductId())
                 .price(orderDto.getAmount())

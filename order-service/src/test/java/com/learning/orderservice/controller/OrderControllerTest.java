@@ -1,10 +1,9 @@
 package com.learning.orderservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.commons.dto.OrderDto;
 import com.learning.commons.enums.OrderStatus;
-import com.learning.orderservice.model.Orders;
+import com.learning.orderservice.model.OrderEntity;
 import com.learning.orderservice.service.OrderServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class OrderControllerTest {
                 .amount(2000.0)
                 .build();
 
-        Orders expected = Orders.builder()
+        OrderEntity expected = OrderEntity.builder()
                 .userId(orderDto.getUserId())
                 .productId(orderDto.getProductId())
                 .price(orderDto.getAmount())
@@ -55,7 +54,7 @@ public class OrderControllerTest {
                         .content(objectMapper.writeValueAsString(orderDto))
         ).andExpect(status().isCreated()).andReturn();
 
-        Orders actual = objectMapper.readValue(result.getResponse().getContentAsString(), Orders.class);
+        OrderEntity actual = objectMapper.readValue(result.getResponse().getContentAsString(), OrderEntity.class);
         assertEquals(expected, actual);
     }
 

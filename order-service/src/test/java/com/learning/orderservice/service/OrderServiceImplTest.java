@@ -1,7 +1,7 @@
 package com.learning.orderservice.service;
 
 import com.learning.commons.dto.OrderDto;
-import com.learning.orderservice.model.Orders;
+import com.learning.orderservice.model.OrderEntity;
 import com.learning.orderservice.repository.OrderRepository;
 import com.learning.orderservice.rmq.RabbitMQProducer;
 import org.junit.jupiter.api.Test;
@@ -34,15 +34,15 @@ class OrderServiceImplTest {
                 .productId(1)
                 .amount(2000.0)
                 .build();
-        when(orderRepository.save(any(Orders.class))).thenReturn(orderService.createOrderEntity(orderDto));
+        when(orderRepository.save(any(OrderEntity.class))).thenReturn(orderService.createOrderEntity(orderDto));
         doNothing().when(rabbitMQProducer).produceMessage(orderDto);
 
-        Orders actual = orderService.createOrder(orderDto);
-        ArgumentCaptor<Orders> orderEntityCaptor = ArgumentCaptor.forClass(Orders.class);
+        OrderEntity actual = orderService.createOrder(orderDto);
+        ArgumentCaptor<OrderEntity> orderEntityCaptor = ArgumentCaptor.forClass(OrderEntity.class);
         verify(orderRepository).save(orderEntityCaptor.capture());
 
         // correctly saved
-        Orders savedOrderEntity = orderEntityCaptor.getValue();
+        OrderEntity savedOrderEntity = orderEntityCaptor.getValue();
         assertEquals(orderDto.getUserId(), savedOrderEntity.getUserId());
         assertEquals(orderDto.getProductId(), savedOrderEntity.getProductId());
         assertEquals(orderDto.getAmount(), savedOrderEntity.getPrice());

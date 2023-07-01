@@ -1,4 +1,4 @@
-package com.learning.orderservice;
+package com.learning.paymentservice.repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +13,8 @@ public abstract class AbstractDatabase {
 
     static MySQLContainer DATABASE = new MySQLContainer("mysql:8.0")
             .withDatabaseName("saga-db")
-            .withUsername("root")
-            .withPassword("root");
+            .withPassword("root")
+            .withUsername("root");
 
     static {
         DATABASE.addEnv("MYSQL_ROOT_PASSWORD", "root");

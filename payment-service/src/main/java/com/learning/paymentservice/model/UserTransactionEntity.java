@@ -13,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserTransactions {
+public class UserTransactionEntity {
 
     @Id
     @GeneratedValue

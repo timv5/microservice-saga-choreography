@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Orders {
+public class OrderEntity {
 
     @Id
     @GeneratedValue

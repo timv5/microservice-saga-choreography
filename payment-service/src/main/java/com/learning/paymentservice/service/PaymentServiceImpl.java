@@ -5,7 +5,7 @@ import com.learning.commons.dto.OrderDto;
 import com.learning.commons.dto.PaymentDto;
 import com.learning.commons.enums.OrderStatus;
 import com.learning.commons.enums.PaymentStatus;
-import com.learning.paymentservice.model.UserTransactions;
+import com.learning.paymentservice.model.UserTransactionEntity;
 import com.learning.paymentservice.repository.UserBalancesRepository;
 import com.learning.paymentservice.repository.UserTransactionsRepository;
 import com.learning.paymentservice.rmq.RabbitMQProducer;
@@ -50,6 +50,6 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private void saveTransaction(Integer orderId, Double amount, Integer userId) {
-        userTransactionsRepository.save(new UserTransactions(orderId, amount, -1, userId));
+        userTransactionsRepository.save(new UserTransactionEntity(orderId, amount, -1, userId));
     }
 }

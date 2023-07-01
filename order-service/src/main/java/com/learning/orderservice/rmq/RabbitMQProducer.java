@@ -2,7 +2,6 @@ package com.learning.orderservice.rmq;
 
 import com.learning.commons.dto.Message;
 import com.learning.commons.dto.OrderDto;
-import com.learning.orderservice.model.Orders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
